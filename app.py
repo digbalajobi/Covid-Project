@@ -1,17 +1,29 @@
-# app.py
-from flask import Flask, request, jsonify
+from flask import Flask, render_template, redirect
+from flask_pymongo import PyMongo
+from scripts import load_global
+# from json import jsonify
+import pandas as pd
+
 app = Flask(__name__)
+
+app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
+mongo = PyMongo(app)
+
+
+@app.route("/global_deaths/", methods=['GET'])
+def data():
+    data_df = load_global.global_death_df()
+    return data_df.to_json();
+
+
 
 @app.route('/getmsg/', methods=['GET'])
 def respond():
     # Retrieve the name from url parameter
     name = request.args.get("name", None)
-
     # For debugging
     print(f"got name {name}")
-
     response = {}
-
     # Check if user sent a name at all
     if not name:
         response["ERROR"] = "no name found, please send a name."
@@ -21,9 +33,11 @@ def respond():
     # Now the user entered a valid name
     else:
         response["MESSAGE"] = f"Welcome {name} to our awesome platform!!"
-
     # Return the response in json format
     return jsonify(response)
+
+
+
 
 @app.route('/post/', methods=['POST'])
 def post_something():
@@ -44,7 +58,7 @@ def post_something():
 # A welcome message to test our server
 @app.route('/')
 def index():
-    return "<h1>Welcome to our server !!</h1>"
+    return "<h1>Covid-19 Dashboard in Dev</h1>"
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
