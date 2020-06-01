@@ -11,7 +11,7 @@ Heatmap
 Choropleth
 Markers 
 
-Intent:
+**Intent:**
 Show the geographic and longitudinal spread of the covid-19 novel coronavirus. Ideally end result would be a visualization similar to a weather map, that showed the movement and spread of covid over time. 
 
 **Instructions**
