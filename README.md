@@ -1,11 +1,11 @@
-Covid-19 Dashboard
+**Covid-19 Dashboard**
 Deborah, Joon, Brent, Joseph
 
-Data Sources: 
+**Data Sources:** 
 https://www.programmableweb.com/api/covid-19-johns-hopkins-csse-data-unofficial
 https://github.com/CSSEGISandData/COVID-19
 
-Visualizations 
+**Visualizations:** 
 Bar Graph
 Heatmap
 Choropleth
@@ -18,7 +18,5 @@ Show the geographic and longitudinal spread of the covid-19 novel coronavirus. I
 *For local development, after pulling, run the local setup script in your Git Bash Terminal with './scripts/local_init.sh'*
 
 
-#Stub Methods:  
-Send a name as a parameter - https://frozen-savannah-66570.herokuapp.com/getmsg/?name=Mark:
-Locally - http://localhost:5000/getmsg/?name=Mark:
+**Routes:**  
 *Global Deaths* - "/global_deaths/" - returns JSON from CSV 

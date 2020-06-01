@@ -9,5 +9,5 @@ def global_death_df():
     return global_df;
 
 
-test = global_death_df()
-print(test.head(5))
+# test = global_death_df()
+# print(test.values.tolist())
