@@ -17,12 +17,20 @@ def data_to_mongo():
 
 
 @app.route("/get_global_deaths_json/", methods=['GET'])
-def data_from_mongo():
+def json_data_from_mongo():
     # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
     global_deaths= mongo.db.global_deaths
     global_data = global_deaths.find({})
     global_data= pd.DataFrame([str(x) for x in global_data])    
     return global_data.to_json()
+
+@app.route("/get_global_deaths_csv/", methods=['GET'])
+def csv_data_from_mongo():
+    # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
+    global_deaths= mongo.db.global_deaths
+    global_data = global_deaths.find({})
+    global_data= pd.DataFrame([str(x) for x in global_data])    
+    return global_data.to_csv(index=False)
 
 
 
