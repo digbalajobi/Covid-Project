@@ -22,6 +22,6 @@ Show the geographic and longitudinal spread of the covid-19 novel coronavirus. I
 - */set_global_deaths_json/*:
     reads JSON from CSV, sets dictionary obj in Mongo
 - */get_global_deaths_json/*:
-    displays JSON from CSV
+    displays JSON, converts from Mongo Obj, 
 - */get_global_deaths_display/*:
-    displays CSV as HTML table
+    displays HTML table from Mongo Obj
