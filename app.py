@@ -17,11 +17,11 @@ def data_json():
     global_deaths.insert_many(data_df.to_dict("records"));
 
 
+# needs to pull from PyMongo
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def data_html():
     data_df = load_global.global_death_df()
     return data_df.to_json();
-
 
 
 @app.route("/get_global_deaths_display/", methods=['GET'])
