@@ -14,7 +14,7 @@ def data_to_mongo():
     global_deaths= mongo.db.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
-
+    
 
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def json_data_from_mongo():
