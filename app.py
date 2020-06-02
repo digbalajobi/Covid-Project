@@ -20,9 +20,9 @@ def data_to_mongo():
 def data_from_mongo():
     # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
     global_deaths= mongo.db.global_deaths
-    global_deaths.find({})
-    return data_df.to_json();
-
+    global_data = global_deaths.find({})
+    global_data= pd.DataFrame([str(x) for x in global_data])    
+    return global_data.to_json()
 
 
 
