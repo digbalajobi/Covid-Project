@@ -28,8 +28,10 @@ def data_from_mongo():
 
 @app.route("/get_global_deaths_display/", methods=['GET'])
 def data_html():
-    data_df = load_global.global_death_df()
-    return data_df.to_html();
+    global_deaths= mongo.db.global_deaths
+    global_data = global_deaths.find({})
+    global_data= pd.DataFrame([str(x) for x in global_data])    
+    return global_data.to_html();
 
 
 
