@@ -7,6 +7,10 @@ app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
 mongo = PyMongo(app)
 
+import os
+is_prod = os.environ.get('IS_HEROKU', None)
+if(is_prod):
+    app.config["MONGO_URI"] = os.environ.get('MONGO_URI', None)   
 
 
 @app.route("/set_global_deaths_dict/", methods=['GET'])
@@ -14,7 +18,6 @@ def data_to_mongo():
     global_deaths= mongo.db.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
-    
 
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def json_data_from_mongo():
@@ -32,15 +35,12 @@ def csv_data_from_mongo():
     global_data= pd.DataFrame([str(x) for x in global_data])    
     return global_data.to_csv(index=False)
 
-
-
 @app.route("/get_global_deaths_display/", methods=['GET'])
 def data_html():
     global_deaths= mongo.db.global_deaths
     global_data = global_deaths.find({})
     global_data= pd.DataFrame([str(x) for x in global_data])    
     return global_data.to_html();
-
 
 
 # A welcome message to test our server

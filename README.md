@@ -15,13 +15,13 @@ Markers
 Show the geographic and longitudinal spread of the covid-19 novel coronavirus. Ideally end result would be a visualization similar to a weather map, that showed the movement and spread of covid over time. 
 
 **Instructions**
-*For local development, after pulling, run the local setup script in your Git Bash Terminal with './scripts/local_init.sh'*
+*For local development, after pulling, run the local setup script in your Git Bash Terminal with '**source ./scripts/local_init.sh**'*
 
 
 **Routes:**  
 - */set_global_deaths_json/*:
     reads JSON from CSV, sets dictionary obj in Mongo
 - */get_global_deaths_json/*:
-    displays JSON, converts from Mongo Obj, 
+    displays JSON, converts from mongo Obj, 
 - */get_global_deaths_display/*:
     displays HTML table from Mongo Obj
