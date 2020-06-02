@@ -16,12 +16,11 @@ def data_to_mongo():
     global_deaths.insert_many(data_df.to_dict("records"));
 
 
-# needs to pull from PyMongo
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def data_from_mongo():
-    data_df = load_global.global_death_df()
-    # global_deaths= mongo.db.global_deaths
-    # global_deaths.find_all()
+    # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
+    global_deaths= mongo.db.global_deaths
+    global_deaths.find({})
     return data_df.to_json();
 
 
