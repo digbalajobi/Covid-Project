@@ -27,6 +27,7 @@ mongo = PyMongo(app)
 
 
 
+
 @app.route("/set_global_deaths_dict/", methods=['GET'])
 def data_to_mongo():
     global_deaths= mongo.db.global_deaths
