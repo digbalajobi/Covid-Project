@@ -4,6 +4,7 @@ import pandas as pd
 from scripts import load_global
 import urllib
 import os
+from pymongo import MongoClient
 
 app = Flask(__name__)
 
@@ -14,24 +15,26 @@ is_prod =os.environ['PWD'] == "/app"
 if(is_prod):
     print("is prod")
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    app.config["MONGO_URI"] =  os.environ['MONGODB_URI']+"&retryWrites=false"
-    mongo = PyMongo(app)
+    uri =  os.environ['MONGODB_URI']
+    # +"&retryWrites=false"
+    client = MongoClient(uri,
+                     connectTimeoutMS=30000,
+                     socketTimeoutMS=None,
+                     socketKeepAlive=True)
+    db = client.get_default_database()
+    print db.collection_names()
+    
 else:
     print("not prod")
     key = pd.read_csv("./key.csv")
     app.config["MAPBOX_KEY"] = key.columns[0]
     app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
-    mongo = PyMongo(app)
-
- 
-    
-
-
+    mongo = PyMongo(app).db
 
 
 @app.route("/set_global_deaths_dict/", methods=['GET'])
 def data_to_mongo():
-    global_deaths= mongo.db.global_deaths
+    global_deaths= mongo.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
 
