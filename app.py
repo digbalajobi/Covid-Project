@@ -21,7 +21,7 @@ if(is_prod):
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
                      socketKeepAlive=True)
-    db = client.get_default_database()
+    mongo = client.get_default_database()
     # print db.collection_names()
     
 else:
