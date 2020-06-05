@@ -15,8 +15,7 @@ is_prod =os.environ['PWD'] == "/app"
 if(is_prod):
     print("is prod")
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    uri =  os.environ['MONGODB_URI']
-    # +"&retryWrites=false"
+    uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
     client = MongoClient(uri,
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
