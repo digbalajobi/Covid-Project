@@ -3,6 +3,7 @@ from flask_pymongo import PyMongo
 import pandas as pd
 from scripts import load_global
 import urllib
+import os
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
@@ -11,18 +12,19 @@ mongo = PyMongo(app)
 
 # need to just use postgres 
 
-# is_prod =os.environ['PWD'] == "/app"
-# if(is_prod):
-#     print("is prod")
-#     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
+is_prod =os.environ['PWD'] == "/app"
+if(is_prod):
+    print("is prod")
+    app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
 #     app.config["MONGO_URI"] = urllib.parse.quote_plus('')
 #         # os.environ['MLAB_URI'])
 #     mongo = PyMongo(app)
-# else:
-#     print("not prod")
-#     key = pd.read_csv("./key.csv")
+else:
+    print("not prod")
+    key = pd.read_csv("./key.csv")
+    app.config["MAPBOX_KEY"] = key.columns[0]
 #     print(key.columns[0])
-#     app.config["MAPBOX_KEY"] = key.columns[0]
+ 
     
 
 
