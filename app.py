@@ -22,7 +22,7 @@ if(is_prod):
                      socketTimeoutMS=None,
                      socketKeepAlive=True)
     db = client.get_default_database()
-    print db.collection_names()
+    # print db.collection_names()
     
 else:
     print("not prod")
