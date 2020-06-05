@@ -14,7 +14,7 @@ is_prod =os.environ['PWD'] == "/app"
 if(is_prod):
     print("is prod")
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    app.config["MONGO_URI"] =  os.environ['MLAB_URI']+"&retryWrites=false"
+    app.config["MONGO_URI"] =  os.environ['MONGODB_URI']+"&retryWrites=false"
     mongo = PyMongo(app)
 else:
     print("not prod")
