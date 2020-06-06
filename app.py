@@ -17,6 +17,7 @@ if(is_prod):
     print(os.environ)
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
     app.config['MONGO_URI'] = os.environ['MONGODB_URI']
+    mongo = PyMongo(app)
     # uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
     # client = MongoClient(host= 'ds347298.mlab.com' ,
     #                  port=47298, 
@@ -43,12 +44,12 @@ else:
     key = pd.read_csv("./key.csv")
     app.config["MAPBOX_KEY"] = key.columns[0]
     app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
-    db = PyMongo(app).db
+    mongo = PyMongo(app)
 
 
 @app.route("/set_global_deaths_dict/", methods=['GET'])
 def data_to_mongo():
-    global_deaths= db.global_deaths
+    global_deaths= mongo.db.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
 
