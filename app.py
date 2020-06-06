@@ -27,7 +27,7 @@ if(is_prod):
     db = connection['heroku_gjqnx9j0']
     # db.authenticate(os.environ['UN'], os.environ['PW'])
     print(db)
-    db.insert({"test"})
+    # db.insert({"test"})
 
     # # print db.collection_names()
     
