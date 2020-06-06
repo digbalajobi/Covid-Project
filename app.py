@@ -21,11 +21,9 @@ if(is_prod):
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
                      socketKeepAlive=True,
-                     username=os.environ['UN'],
-                     password=os.environ['PW']
                      )
     connection = client.get_default_database()
-    print(connection)
+    print(connection.admin.command('ismaster'))
     db = connection['heroku_gjqnx9j0']
     # db.authenticate(os.environ['UN'], os.environ['PW'])
     print(db)
