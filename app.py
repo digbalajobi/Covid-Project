@@ -20,7 +20,10 @@ if(is_prod):
     client = MongoClient(uri,
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
-                     socketKeepAlive=True)
+                     socketKeepAlive=True,
+                     username=os.environ['UN'],
+                     password=os.environ['PW']
+                     )
     connection = client.get_default_database()
     print(connection)
     db = connection['heroku_gjqnx9j0']
