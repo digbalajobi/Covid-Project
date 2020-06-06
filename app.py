@@ -19,8 +19,9 @@ def data_to_mongo():
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def data_from_mongo():
     # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
-    global_deaths= mongo.db.global_deaths
-    global_deaths.find({})
+    # global_deaths= mongo.db.global_deaths
+    # global_deaths.find({})
+    data_df = load_global.global_death_df()
     return data_df.to_json();
 
 
