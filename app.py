@@ -16,12 +16,12 @@ if(is_prod):
     print("is prod")
     print(os.environ)
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    # uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
-    # client = MongoClient(uri,
-    #                  connectTimeoutMS=30000,
-    #                  socketTimeoutMS=None,
-    #                  socketKeepAlive=True)
-    # mongo = client.get_default_database()
+    uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
+    client = MongoClient(uri,
+                     connectTimeoutMS=30000,
+                     socketTimeoutMS=None,
+                     socketKeepAlive=True)
+    mongo = client.get_default_database()
     # # print db.collection_names()
     
 else:
