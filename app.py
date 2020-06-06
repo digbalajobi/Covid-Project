@@ -24,7 +24,9 @@ if(is_prod):
     connection = client.get_default_database()
     print(connection)
     db = connection['heroku_gjqnx9j0']
-    db.authenticate(os.environ['UN'], os.environ['PW'])
+    # db.authenticate(os.environ['UN'], os.environ['PW'])
+    print(db)
+
     # # print db.collection_names()
     
 else:
