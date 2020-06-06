@@ -34,12 +34,12 @@ else:
     key = pd.read_csv("./key.csv")
     app.config["MAPBOX_KEY"] = key.columns[0]
     app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
-    mongo = PyMongo(app).db
+    db = PyMongo(app).db
 
 
 @app.route("/set_global_deaths_dict/", methods=['GET'])
 def data_to_mongo():
-    global_deaths= mongo.global_deaths
+    global_deaths= db.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
 
