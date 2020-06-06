@@ -16,7 +16,7 @@ if(is_prod):
     print("is prod")
     print(os.environ)
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    app.config['MONGO_URI'] = os.environ['MONGODB_URI']
+    app.config['MONGO_URI'] = os.environ['MONGODB_URI']+"&retryWrites=false"
     mongo = PyMongo(app)
     # uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
     # client = MongoClient(host= 'ds347298.mlab.com' ,
