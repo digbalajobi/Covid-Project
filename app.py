@@ -16,19 +16,26 @@ if(is_prod):
     print("is prod")
     print(os.environ)
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    uri =  os.environ['MLAB_URI'] +"&retryWrites=false"
+    uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
+    # client = MongoClient(host=<<hostname>>,
+    #                  port=<<port>>, 
+    #                  username=<<user_name>>, 
+    #                  password=<<password>>,
+    #                 authSource="admin")
+    # db_obj = client[db_name]
     client = MongoClient(uri,
                      connectTimeoutMS=30000,
                      socketTimeoutMS=None,
                      socketKeepAlive=True,
                      )
-    connection = client.get_default_database()
-    # print(connection.admin.command('ismaster'))
-    db = connection['heroku_gjqnx9j0']
-    # db.authenticate(os.environ['UN'], os.environ['PW'])
+    db = client['heroku_gjqnx9j0']
     print(db)
+    # connection = client.get_default_database()
+    # print(connection.admin.command('ismaster'))
+    # db = connection['heroku_gjqnx9j0']
+    # db.authenticate(os.environ['UN'], os.environ['PW'])
+    # print(db)
     # db.insert({"test"})
-
     # # print db.collection_names()
     
 else:
