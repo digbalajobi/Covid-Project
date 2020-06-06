@@ -23,10 +23,11 @@ if(is_prod):
                      socketKeepAlive=True,
                      )
     connection = client.get_default_database()
-    print(connection.admin.command('ismaster'))
+    # print(connection.admin.command('ismaster'))
     db = connection['heroku_gjqnx9j0']
     # db.authenticate(os.environ['UN'], os.environ['PW'])
     print(db)
+    db.insert("test")
 
     # # print db.collection_names()
     
