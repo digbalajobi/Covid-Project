@@ -16,28 +16,28 @@ if(is_prod):
     print("is prod")
     print(os.environ)
     app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
-    uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
-    client = MongoClient(host= 'ds347298.mlab.com' ,
-                     port=47298, 
-                     username=os.environ['UN'], 
-                     password=os.environ['PW'],
-                    authSource="admin")
-    # db_obj = client[db_name]
-    # client = MongoClient(uri,
-    #                  connectTimeoutMS=30000,
-    #                  socketTimeoutMS=None,
-    #                  socketKeepAlive=True,
-    #                  )
-    db = client['heroku_gjqnx9j0']
-    print(db)
-    # connection = client.get_default_database()
-    # print(connection.admin.command('ismaster'))
-    # db = connection['heroku_gjqnx9j0']
-    # db.authenticate(os.environ['UN'], os.environ['PW'])
+    app.config['MONGO_URI'] = os.environ['MONGODB_URI']
+    # uri =  os.environ['MONGODB_URI'] +"&retryWrites=false"
+    # client = MongoClient(host= 'ds347298.mlab.com' ,
+    #                  port=47298, 
+    #                  username=os.environ['UN'], 
+    #                  password=os.environ['PW'],
+    #                 authSource="admin")
+    # # db_obj = client[db_name]
+    # # client = MongoClient(uri,
+    # #                  connectTimeoutMS=30000,
+    # #                  socketTimeoutMS=None,
+    # #                  socketKeepAlive=True,
+    # #                  )
+    # db = client['heroku_gjqnx9j0']
     # print(db)
-    # db.insert({"test"})
-    # # print db.collection_names()
-    
+    # # connection = client.get_default_database()
+    # # print(connection.admin.command('ismaster'))
+    # # db = connection['heroku_gjqnx9j0']
+    # # db.authenticate(os.environ['UN'], os.environ['PW'])
+    # # print(db)
+    # # db.insert({"test"})
+    # # # print db.collection_names(
 else:
     print("not prod")
     key = pd.read_csv("./key.csv")
