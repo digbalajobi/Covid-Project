@@ -22,6 +22,7 @@ if(is_prod):
                      socketTimeoutMS=None,
                      socketKeepAlive=True)
     mongo = client.get_default_database()
+    print(mongo)
     # # print db.collection_names()
     
 else:
