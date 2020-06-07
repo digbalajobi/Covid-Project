@@ -39,7 +39,7 @@ function drawPlot(path, currentDate) {
       maxZoom: 18,
       zoomOffset: -1,
       id: 'mapbox/streets-v11',
-      accessToken: 'pk.eyJ1IjoiYmVsYWN5ODciLCJhIjoiY2theDdxdmhsMDRkOTJ3cXRsZjNya2dqNyJ9.CbA_2MAMGvLUI-Sus96Qqw'
+      accessToken: mbKey
       });
   
     var myMap = L.map("map", {
@@ -102,6 +102,7 @@ function drawPlot(path, currentDate) {
   
   
   function getDateArray(dataSet){
+    
     d3.csv(dataSet).then(function(data) { 
     
     Object.entries(data[0]).forEach(([key,value])=>{
@@ -119,10 +120,22 @@ function drawPlot(path, currentDate) {
         dateArray.forEach(function(date){
         var newOption = dropMenu.append("option")
         newOption.text(date)
+
+
+
         })
+        
+    
+      
+
+      })
   
-      }
-    )
+    
   } ;
   
-  init(dataSet, currentDate);
+
+  init(dataSet, currentDate).then(function(){
+
+    
+  });
+
