@@ -56,10 +56,10 @@ function update(index) {
  
 function optionChanged (d){
   var dataSets = {
-    "confirmed" : "confirmed_US.csv",
-    "deaths" : "deaths_us.csv",
-    "global_confirmed" : "confirmed_global.csv",
-    "deaths_global" : "deaths_global.csv"
+    "US confirmed" : "/get_confirmed_us",
+    "US deaths" : "/get_us_deaths",
+    "global_confirmed" : "/get_confirmed_global",
+    "deaths_global" : "/get_global_deaths_display"
     }
   console.log(`option changed to ${d}`)
   
