@@ -34,4 +34,4 @@ Show the geographic and longitudinal spread of the covid-19 novel coronavirus. I
 
 
 **Bugs**
-- Heroku mLab creates connection but refues to authenticate.
+- Heroku mLab creates connection but refuses to authenticate.
