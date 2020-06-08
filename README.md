@@ -19,13 +19,19 @@ Show the geographic and longitudinal spread of the covid-19 novel coronavirus. I
 
 
 **Routes:**  
-- */set_global_deaths_json/*:
-    reads JSON from CSV, sets dictionary obj in Mongo
-- */get_global_deaths_json/*:
-    displays JSON, converts from mongo Obj, 
-- */get_global_deaths_csv/*:
-    displays CSV, converts from mongo Obj, 
-- */get_global_deaths_display/*:
-    displays HTML table from Mongo Obj
-- */heatmap/
-    display heatmap of covid deaths on *DATE?*
+- **/set_global_deaths_json/**:
+    reads JSON from CSV, sets dictionary obj in Mongo **^LOCAL MONGO^**
+- **/get_global_deaths_json/**:
+    displays JSON, converts from mongo Obj, **^LOCAL MONGO^**
+- **/get_global_deaths_csv/**:
+    displays CSV, converts from mongo Obj, **^LOCAL MONGO^**
+- **/get_global_deaths_display/**:
+    displays HTML table from Mongo Obj **^LOCAL MONGO^**
+- **/heatmap/**:
+    display heatmap of covid deaths on *Date* by *Dataset*
+- **/line_graph/**:
+    displays time series deaths by country via dropdown
+
+
+**Bugs**
+- Heroku mLab creates connection but refues to authenticate.

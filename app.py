@@ -30,7 +30,6 @@ def data_to_mongo():
 
 @app.route("/get_global_deaths_json/", methods=['GET'])
 def json_data_from_mongo():
-    # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
     global_deaths= mongo.db.global_deaths
     global_data = global_deaths.find({})
     global_data= pd.DataFrame([str(x) for x in global_data])    
@@ -40,12 +39,9 @@ def json_data_from_mongo():
 def csv_data_from_mongo():
     global_data_path="./data/global_deaths.csv"
     global_df= pd.read_csv(global_data_path)
-    return global_df.to_csv(index=False)
-    # ASSUMING THAT THE DATA HAS ALREADY BEEN LOADED INTO MONGO
-    # global_deaths= mongo.db.global_deaths
-    # global_data = global_deaths.find({})
-    # global_data= pd.DataFrame([str(x) for x in global_data])    
-    # return global_data_path;
+    global_df=global_df.groupby(['CountryRegion']).sum()
+    return global_df.to_csv(index=True)
+    
 
 @app.route("/get_global_deaths_display/", methods=['GET'])
 def data_html():
@@ -62,6 +58,20 @@ def confirmed_us():
     return confirmed_us_df.to_csv()
 
 
+@app.route("/get_confirmed_global", methods=['GET'])
+def confirmed_global():
+    confirmed_global_path="./data/confirmed_global.csv"
+    confirmed_global_df= pd.read_csv(confirmed_global_path)
+    return confirmed_global_df.to_csv()
+    
+
+@app.route("/get_us_deaths", methods=['GET'])
+def deaths_us():
+    us_deaths_path="./data/us_deaths.csv"
+    us_deaths_df= pd.read_csv(us_deaths_path)
+    return us_deaths_df.to_csv()
+
+
 @app.route("/heatmap/", methods=['GET'])
 def heatmap():
     print()
@@ -74,13 +84,10 @@ def linegraph():
     return render_template("index_linegraph.html")
 
 
-
-
 # A welcome message to test our server
 @app.route('/')
 def index():
     return render_template("index_main.html")
-
 
 
 if __name__ == '__main__':
