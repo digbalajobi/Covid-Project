@@ -108,7 +108,7 @@ function init (dataSet, currentDate){
       // })
 }
 
-var dataSet = "confirmed_US.csv"
+var dataSet = "/get_confirmed_us"
 var minDate = "1/22/20";
 var maxDate = "5/21/20";
 var sliderStartX= 100;
