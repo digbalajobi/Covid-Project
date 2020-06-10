@@ -1,0 +1,6 @@
+-change title to "Covid-19 heatmap, 1/22/20-5/31/20"
+
+-add description under map, near dropdowns
+	"Select which data set you would like to view and select which date you would like to see displayed.  This map will zoom in on any location"
+
+-check version of heatmap2.js on branch 'brent' for updates on dataset key names
