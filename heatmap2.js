@@ -32,11 +32,13 @@ function changeDate (d){
    drawPlot(dataSet, currentDate)   
  }
 
+
 function update(index) {
-  // Ensure the slider can't go past the valid range of values    
+  // Ensure the slider can't go past the valid range of values   
+
   i=dateArray[index]
-  console.log(i)  
-  console.log(minDate)
+
+
   if (i < minDate) {
       i = minDate
   }
@@ -54,11 +56,11 @@ function update(index) {
  
 function optionChanged (d){
   var dataSets = {
-    "confirmed" : "confirmed_US.csv",
-    "deaths" : "deaths_us.csv",
-    "global_confirmed" : "confirmed_global.csv",
-    "deaths_global" : "deaths_global.csv"
-    }
+    "confirmed cases in US" : "confirmed_US.csv",
+  "deaths in US" : "deaths_us.csv",
+  "confirmed cases global" : "confirmed_global.csv",
+  "global deaths" : "deaths_global.csv"
+  }
   console.log(`option changed to ${d}`)
   
   drawPlot(dataSets[d], currentDate)
@@ -80,10 +82,10 @@ function optionChanged (d){
   });
 
 var dataSets = {
-  "confirmed" : "confirmed_US.csv",
-  "deaths" : "deaths_us.csv",
-  "global_confirmed" : "confirmed_global.csv",
-  "deaths_global" : "deaths_global.csv"
+  "confirmed cases in US" : "confirmed_US.csv",
+  "deaths in US" : "deaths_us.csv",
+  "confirmed cases global" : "confirmed_global.csv",
+  "global deaths" : "deaths_global.csv"
   }
 
 function init (dataSet, currentDate){
@@ -94,13 +96,13 @@ function init (dataSet, currentDate){
   d3.selectAll("option").remove();
   var dropMenu = d3.select("#selDataset")
   var newOption = dropMenu.append("option")
-  newOption.text("confirmed")
+  newOption.text("confirmed cases in US")
   var newOption = dropMenu.append("option")
-  newOption.text("deaths")
+  newOption.text("deaths in US")
   var newOption = dropMenu.append("option")
-  newOption.text("global_confirmed")  
+  newOption.text("confirmed cases global")  
   var newOption = dropMenu.append("option")
-  newOption.text("deaths_global")  
+  newOption.text("global deaths")  
 
 
       // })
@@ -113,21 +115,19 @@ var sliderStartX= 100;
 var currentDate = minDate;
 var currentValue = 0;
 
-var dateArray=[]
-var epochArray = []
-var dateArrayIndices=[]
-var chartWidth = 720
+var dateArray=[];
+var epochArray = [];
+var dateArrayIndices=[];
+var chartWidth = 720;
 
 var svg = d3.select("#slider")
   .append("svg")
   .attr("width", chartWidth)
 
 
-function getDateArray(dataSet){
-  
-  d3.csv(dataSet).then(function(data) { 
-  
-  var counter = 1;
+function getDateArray(dataSet){  
+  d3.csv(dataSet).then(function(data) {   
+  var counter = 0;
   Object.entries(data[0]).forEach(([key,value])=>{
     const CODE_PATTERN = /^([0-9]{1,2}.[0-9]{1,2}.[0-9]{2})$/;
     const validateCode = function(key) {
@@ -139,76 +139,82 @@ function getDateArray(dataSet){
         dateArrayIndices.push(counter)
         counter += 1
         };
-      })           
+      })  
+      initialScale = d3.extent(dateArray)         
       var dropMenu = d3.select("#selDate")
       dateArray.forEach(function(date){
       var newOption = dropMenu.append("option")
       newOption.text(date)
-      })
- 
-    }
-  )
-
+      }) 
+    })
+   
+    console.log(typeof currentDate)
+    console.log(dateArray)    
+    console.log(typeof dateArray)
+    console.log(dateArray[0])
 } ;
-var currentIndex = dateArray.indexOf(currentDate) 
+
+
 init(dataSet, currentDate);
 
-// var dateScale = d3.scaleLinear()
-//   .domain([0, 131])
-//   .range([sliderStartX, chartWidth])
+var initialScale = [0, 131]
 
-// var slider = svg.append("g")
-//   .attr("class", "slider")
-//   .attr("transform", "translate(0, 30)");
+var dateScale = d3.scaleLinear()
+  .domain([0, 131])
+  .range([sliderStartX, chartWidth])
 
-// slider.append("line")
-//   .attr("class", "track")
-//   .attr("x1", sliderStartX)
-//   .attr("x2", chartWidth)
-//   .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-//   .attr("class", "track-inset")
-//   .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
-//   .attr("class", "track-overlay")
-//   .call(d3.drag()
-//       .on("start.interrupt", function() { slider.interrupt(); })
-//       .on("start drag", function() {
+var slider = svg.append("g")
+  .attr("class", "slider")
+  .attr("transform", "translate(0, 30)");
+
+slider.append("line")
+  .attr("class", "track")
+  .attr("x1", sliderStartX)
+  .attr("x2", chartWidth)
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+  .attr("class", "track-inset")
+  .select(function() { return this.parentNode.appendChild(this.cloneNode(true)); })
+  .attr("class", "track-overlay")
+  .call(d3.drag()
+      .on("start.interrupt", function() { slider.interrupt(); })
+      .on("start drag", function() {
         
-//         if (currentIndex !== Math.floor(dateScale.invert(d3.event.x))) {
-//           console.log(currentIndex)
-//           currentValue = d3.event.x;
-//           currentIndex = Math.floor(dateScale.invert(currentValue));
-//           update(currentIndex)
-//           console.log(currentIndex)         
-//           }
-//       })
-//   );
+        if (currentIndex !== Math.floor(dateScale.invert(d3.event.x))) {
+          console.log(currentIndex)
+          currentValue = d3.event.x;
+          currentIndex = Math.floor(dateScale.invert(currentValue));
+          update(currentIndex)
+          console.log(currentIndex)         
+          }
+      })
+  );
 
-// slider.insert("g", ".track-overlay")
-//   .attr("class", "ticks")
-//   .selectAll("text")
-//   .data(dateScale.ticks())
-//   .enter()
-//   .append("text")
-//   .attr("x", d => dateScale(d))
-//   .attr("y", 20)
-//   .attr("font-size", 12)
-//   .attr("text-anchor", "middle")
-//   .text(d => d);
+slider.insert("g", ".track-overlay")
+  .attr("class", "ticks")
+  .selectAll("text")
+  .data(dateScale.ticks())
+  .enter()
+  .append("text")
+  .attr("x", d => dateScale(d))
+  .attr("y", 20)
+  .attr("font-size", 12)
+  .attr("text-anchor", "middle")
+  .text(d => d);
 
-// // This is the circle on top of the slider
-// var handle = slider.insert("circle", ".track-overlay")
-//     .attr("class", "handle")
-//     .attr("cx", sliderStartX)
-//     .attr("r", 9);
+// This is the circle on top of the slider
+var handle = slider.insert("circle", ".track-overlay")
+    .attr("class", "handle")
+    .attr("cx", sliderStartX)
+    .attr("r", 9);
 
-// // Text label on the circle for which year is selected
-// var label = slider.append("text")  
-//     .attr("class", "label")
-//     .attr("text-anchor", "middle")
-//     .attr("font-size", 12)
-//     .attr("x", sliderStartX)
-//     .text(currentDate)
-//     .attr("transform", "translate(0 , -15)");
+// Text label on the circle for which year is selected
+var label = slider.append("text")  
+    .attr("class", "label")
+    .attr("text-anchor", "middle")
+    .attr("font-size", 12)
+    .attr("x", sliderStartX)
+    .text(currentDate)
+    .attr("transform", "translate(0 , -15)");
 
 
 // function drawPlayButton(button) {
@@ -270,37 +276,35 @@ init(dataSet, currentDate);
 // drawPlayButton(button);
 
 
+var currentIndex = dateArray.indexOf(toString(currentDate))
+// This function will run only for the "play" button functionality
+function step() {
+  update(currentIndex);
 
-// // This function will run only for the "play" button functionality
-// function step() {
-//   // var currentIndex = dateArray.indexOf(currentDate)
-//   // console.log(currentIndex)
-//   update(currentIndex);
-
-//   if (currentIndex >= d3.max(dateArrayIndices)) {
-//       drawPlayButton(d3.select("#button-g"));
-//       currentIndex = d3.min(dateArrayIndices);
-//       clearInterval(timer);
-//   };
+  if (currentIndex >= d3.max(dateArrayIndices)) {
+      drawPlayButton(d3.select("#button-g"));
+      currentIndex = d3.min(dateArrayIndices);
+      clearInterval(timer);
+  };
   
-//   currentIndex = currentIndex + 1;
-// };
+  currentIndex = currentIndex + 1;
+};
 
-// // Click event on the button
-// button.on("click", function() {
-//   var button = d3.select(this);
+// Click event on the button
+button.on("click", function() {
+  var button = d3.select(this);
 
-//   if (d3.select("#button").attr("class") == "inactive") {
-//       drawPauseButton(button);
+  if (d3.select("#button").attr("class") == "inactive") {
+      drawPauseButton(button);
       
-//       // Define the interval to recursively run a function
-//       timer = setInterval(step, 50)
-//   }
-//   else {
-//       drawPlayButton(button)
+      // Define the interval to recursively run a function
+      timer = setInterval(step, 50)
+  }
+  else {
+      drawPlayButton(button)
 
-//       // Stop the currently running interval
-//       clearInterval(timer);
-//       ;
-//   }
-// });
+      // Stop the currently running interval
+      clearInterval(timer);
+      ;
+  }
+});
