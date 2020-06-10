@@ -33,7 +33,7 @@ var trace1 = {
          marker: {
            size: bubbleSize,
            sizemode: "area",
-           color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)', 'rgb(12,240,233)', 'rgb(218, 75, 75)', 'rgb(153, 51, 255)', 'rgb(153, 204, 255)', 'rgb(255, 255, 51)', 'rgb(192, 192, 192)', 'rgb(255, 0, 0)'],
+           color: topValues,
          }
        };
        var chartdata = [trace1];
