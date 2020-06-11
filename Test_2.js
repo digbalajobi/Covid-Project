@@ -13,7 +13,7 @@ var topCountries = [];
 var topValues =[]
   function filterCountries(obj) {
     Object.entries(obj).forEach(([key, value]) => {
-      if (value > 100000){
+      if (value > 50000){
         topCountries.push(key);
         topValues.push(value)
       }
@@ -33,6 +33,9 @@ var trace1 = {
          marker: {
            size: bubbleSize,
            sizemode: "area",
+           colorscale: [[0, 'rgb(0, 0, 0)'], [1, 'rgb(0, 255, 0)']],
+           cmin: 0,
+           
            color: topValues,
          }
        };
