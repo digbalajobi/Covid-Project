@@ -5,7 +5,7 @@ from scripts import load_global
 import urllib
 import os
 from pymongo import MongoClient
-from scripts import global_choropleth
+# from scripts import global_choropleth
 import json
 import plotly
 import plotly.graph_objs as go
