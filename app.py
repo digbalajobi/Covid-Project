@@ -15,7 +15,6 @@ app_flask = Flask(__name__)
 is_prod =os.environ['PWD'] == "/app"
 if(is_prod):
     print("is prod")
-    print(os.environ)
     app_flask.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
 else:
     print("not prod")
