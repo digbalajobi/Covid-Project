@@ -4,12 +4,7 @@ import pandas as pd
 from scripts import load_global
 import urllib
 import os
-from pymongo import MongoClient
 # from scripts import global_choropleth
-import json
-import plotly
-import plotly.graph_objs as go
-from plotly.offline import plot
 
 
 app = Flask(__name__)
@@ -94,7 +89,6 @@ def linegraph():
 # def covid_data_1():
 #     covid_data_path="./data/covid_19_data.csv"
 #     covid_df= pd.read_csv(covid_data_path)
-
     # return covid_df.to_csv()
 
 @app.route("/bubble/", methods=['GET'])
