@@ -36,8 +36,8 @@ d3.csv("/get_confirmed_global").then(function (data) {
             sizemode: "area",
             color: topValues,
             colorscale: [
-                [0, 'lightgreen'],
-                [.5, 'darkblue'],
+                [0, 'green'],
+                [.5, 'purple'],
                 [1, "orange"]
             ],
             cmin: 0,
