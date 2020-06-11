@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covid-19 Dashboard</title>
+</head>
+
+<body style="background-image: url('/static/images/covid.png'); 
+background-repeat:repeat; z-index: -100;
+overflow-x: scroll !important;
+overflow-y: scroll !important;
+">
+
+    <div style="
+    background-color:white;
+    color:black;
+    padding: 20px; margin: 0 auto; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width:800px;
+   ">
+        <h1>Pandemic Dashboard</h1>
+        <h2> Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) A.K.A. Covid-2019 Novel Coronavirus </h2>
+
+
+        <div style="flex-direction: column;
+            margin: 50px;
+            ">
+            <h3>
+                Line Graph
+            </h3>
+            <h4>Cases By Country</h4>
+            <iframe src="/linegraph" height="600px" width="600px"></iframe>
+            <p>
+                This is an interactive tool that displays the global impact of the Coronavirus pandemic.
+                You are able to physically see the increase in Coronavirus cases within a span of 5 months
+                (January to May of 2020). The drop down on the top left hand of corner
+                contains a list of countries in Alphabetical order which allows for the graph to change by country.
+            </p>
+        </div>
+
+
+        <div style="flex-direction: column;
+            margin: 50px;
+            ">
+            <h3>
+                Interchangeable Heatmap
+            </h3>
+            <h4>US vs. Global + Cases vs Deaths</h4>
+            <iframe src="/heatmap" height="600px" width="600px"></iframe>
+            <p>
+                Select which data set you would like to view
+                and select which date you would like to see displayed.
+                This map will zoom in on any location.
+            </p>
+        </div>
+
+
+        <div style="flex-direction: column;
+            margin: 50px;
+            ">
+            <h3>
+                Bubble Graph
+            </h3>
+            <h4>
+                Global Confirmed Cases
+            </h4>
+            <iframe src="/bubble" height="600px" width="600px"></iframe>
+            <p>
+                Bubble Chart showing countries with over 100,000 cases as of 06/02/20.
+                The size of the bubbles represents the amount of confirmed cases.
+                As can be seen in the chart, United States has far surpassed any other country
+                when it comes to Covid-19 cases. The US has more than 1.8 million confirmed cases.
+            </p>
+
+
+        </div>
+
+
+
+        <div style="flex-direction: column;
+            margin: 50px;
+            ">
+            <h3>
+                Choropleth Map
+            </h3>
+            <h4>
+                State Progression
+            </h4>
+            <iframe src="/choro" height="600px" width="600px"></iframe>
+            <p>
+               
+            </p>
+
+            
+        </div>
+
+
+    </div>
+    </div>
+</body>
+
+</html>
