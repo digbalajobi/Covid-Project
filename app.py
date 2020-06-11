@@ -10,35 +10,35 @@ import os
  # from scripts import global_choropleth
 
 
-app_flask = Flask(__name__)
+app = Flask(__name__)
 
 is_prod =os.environ['PWD'] == "/app"
 if(is_prod):
     print("is prod")
-    app_flask.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
+    app.config["MAPBOX_KEY"] = os.environ['MAPBOX_KEY']
 else:
     print("not prod")
     key = pd.read_csv("./key.csv")
-    app_flask.config["MAPBOX_KEY"] = key.columns[0]
-    app_flask.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
-    mongo = PyMongo(app_flask)
+    app.config["MAPBOX_KEY"] = key.columns[0]
+    app.config["MONGO_URI"] = "mongodb://localhost:27017/covid_app"
+    mongo = PyMongo(app)
 
 
-@app_flask.route("/set_global_deaths_dict/", methods=['GET'])
+@app.route("/set_global_deaths_dict/", methods=['GET'])
 def data_to_mongo():
     global_deaths= mongo.db.global_deaths
     data_df = load_global.global_death_df()
     global_deaths.insert_many(data_df.to_dict("records"));
 
 
-@app_flask.route("/get_global_deaths_json/", methods=['GET'])
+@app.route("/get_global_deaths_json/", methods=['GET'])
 def json_data_from_mongo():
     global_deaths= mongo.db.global_deaths
     global_data = global_deaths.find({})
     global_data= pd.DataFrame([str(x) for x in global_data])    
     return global_data.to_json()
 
-@app_flask.route("/get_global_deaths_csv/", methods=['GET'])
+@app.route("/get_global_deaths_csv/", methods=['GET'])
 def csv_data_from_mongo():
     global_data_path="./data/global_deaths.csv"
     global_df= pd.read_csv(global_data_path)
@@ -46,7 +46,7 @@ def csv_data_from_mongo():
     return global_df.to_csv(index=True)
     
 
-@app_flask.route("/get_global_deaths_display/", methods=['GET'])
+@app.route("/get_global_deaths_display/", methods=['GET'])
 def data_html():
     global_deaths= mongo.db.global_deaths
     global_data = global_deaths.find({})
@@ -54,14 +54,14 @@ def data_html():
     return global_data.to_html();
 
 
-@app_flask.route("/get_confirmed_us", methods=['GET'])
+@app.route("/get_confirmed_us", methods=['GET'])
 def confirmed_us():
     confirmed_us_path="./data/confirmed_US.csv"
     confirmed_us_df= pd.read_csv(confirmed_us_path)
     return confirmed_us_df.to_csv()
 
 
-@app_flask.route("/get_confirmed_global", methods=['GET'])
+@app.route("/get_confirmed_global", methods=['GET'])
 def confirmed_global():
     confirmed_global_path="./data/confirmed_global.csv"
     confirmed_global_df= pd.read_csv(confirmed_global_path)
@@ -69,38 +69,38 @@ def confirmed_global():
     return confirmed_global_df.to_csv(index=True)
     
 
-@app_flask.route("/get_us_deaths", methods=['GET'])
+@app.route("/get_us_deaths", methods=['GET'])
 def deaths_us():
     us_deaths_path="./data/us_deaths.csv"
     us_deaths_df= pd.read_csv(us_deaths_path)
     return us_deaths_df.to_csv()
 
 
-@app_flask.route("/heatmap/", methods=['GET'])
+@app.route("/heatmap/", methods=['GET'])
 def heatmap():
     print()
-    return render_template("index_heatmap.html", MBKEY = app_flask.config["MAPBOX_KEY"])
+    return render_template("index_heatmap.html", MBKEY = app.config["MAPBOX_KEY"])
 
 
-@app_flask.route("/linegraph/", methods=['GET'])
+@app.route("/linegraph/", methods=['GET'])
 def linegraph():
     print()
     return render_template("index_linegraph.html")
 
 
-# @app_flask.route("/covid_data/", methods=['GET'])
+# @app.route("/covid_data/", methods=['GET'])
 # def covid_data_1():
 #     covid_data_path="./data/covid_19_data.csv"
 #     covid_df= pd.read_csv(covid_data_path)
     # return covid_df.to_csv()
 
-@app_flask.route("/bubble/", methods=['GET'])
+@app.route("/bubble/", methods=['GET'])
 def bubblegraph():
     return render_template("index_bubble.html")
 
-# @app_flask.route("/dash_choro/",methods=['GET'])
+# @app.route("/dash_choro/",methods=['GET'])
 # def choro():
-@app_flask.route("/dash/")
+@app.route("/dash/")
 def dash():
     import plotly
 from plotly.graph_objs import *
@@ -125,7 +125,7 @@ globdf['ratio'] = (globdf['positive']/(globdf['positive']+globdf['negative'])).f
 globdf['negative'] = (globdf['positive']+globdf['negative']).fillna(0)  # make negative total
 
 stdf = pd.pivot_table(globdf,values='death',index='date',columns='state').fillna(0.)
-server = app_flask
+server = app
 
 app_dash = dash.Dash('__name__,',server=server, routes_pathname_prefix='/choro/')
 print("ran dash server")
@@ -214,12 +214,12 @@ def update_graph(slide):
 
 
 # A welcome message to test our server
-@app_flask.route('/')
+@app.route('/')
 def index():
     return render_template("index_main.html")
 
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
-    app_flask.run(threaded=True, port=5000)
-    app_flask.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.run(threaded=True, port=5000)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True
