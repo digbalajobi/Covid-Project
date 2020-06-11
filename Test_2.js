@@ -55,7 +55,7 @@ var trace1 = {
        };
        var chartdata = [trace1];
        var layout = {
-         title : "Countries with over 100,000 Covid-19 Cases"
+         title : "Countries with over 50,000 Covid-19 Cases"
        };
        Plotly.newPlot('plot', chartdata, layout);
 });
