@@ -90,10 +90,10 @@ def linegraph():
     return render_template("index_linegraph.html")
 
 
-@app.route("/covid_data/", methods=['GET'])
-def covid_data_1():
-    covid_data_path="./data/covid_19_data.csv"
-    covid_df= pd.read_csv(covid_data_path)
+# @app.route("/covid_data/", methods=['GET'])
+# def covid_data_1():
+#     covid_data_path="./data/covid_19_data.csv"
+#     covid_df= pd.read_csv(covid_data_path)
 
     # return covid_df.to_csv()
 
@@ -102,17 +102,17 @@ def bubblegraph():
     return render_template("index_bubble.html")
 
 
-@app.route("/choro/", methods=['GET'])
-def choro():
-    print()
-    graph = global_choropleth.choro()
-    fig = go.Figure()
-    fig.add_trace(graph)
-    plt_div = plot(fig, output_type='div')
-    # return render(request, "index.html", context={'plot_div': plot_div})
-    # ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
-    # graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    return render_template('index_test.html', graphJSON=graphJSON)
+# @app.route("/choro/", methods=['GET'])
+# def choro():
+#     print()
+#     graph = global_choropleth.choro()
+#     fig = go.Figure()
+#     fig.add_trace(graph)
+#     plt_div = plot(fig, output_type='div')
+#     # return render(request, "index.html", context={'plot_div': plot_div})
+#     # ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+#     # graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+#     return render_template('index_test.html', graphJSON=graphJSON)
 
 
 
