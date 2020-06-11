@@ -33,10 +33,24 @@ var trace1 = {
          marker: {
            size: bubbleSize,
            sizemode: "area",
-           colorscale: [[0, 'rgb(0, 0, 0)'], [1, 'rgb(0, 255, 0)']],
+           colorscale: [[0, 'rgb(200, 255, 200)'], [1, 'rgb(0, 100, 0)']],
            cmin: 0,
-           
+           cmax: 1800000,
            color: topValues,
+           colorbar: {
+            thickness: 10,
+            y: 0.5,
+            ypad: 0,
+            title: 'Confirmed Cases',
+            titleside: 'bottom',
+            outlinewidth: 1,
+            outlinecolor: 'black',
+            tickfont: {
+              family: 'Lato',
+              size: 14,
+              color: 'green'
+            }
+           }
          }
        };
        var chartdata = [trace1];
