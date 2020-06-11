@@ -63,7 +63,8 @@ def confirmed_us():
 def confirmed_global():
     confirmed_global_path="./data/confirmed_global.csv"
     confirmed_global_df= pd.read_csv(confirmed_global_path)
-    return confirmed_global_df.to_csv()
+    confirmed_global_df=confirmed_global_df.groupby(['CountryRegion']).sum()
+    return confirmed_global_df.to_csv(index=True)
     
 
 @app.route("/get_us_deaths", methods=['GET'])
