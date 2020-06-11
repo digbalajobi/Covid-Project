@@ -5,6 +5,12 @@ from scripts import load_global
 import urllib
 import os
 from pymongo import MongoClient
+from scripts import global_choropleth
+import json
+import plotly
+import plotly.graph_objs as go
+from plotly.offline import plot
+
 
 app = Flask(__name__)
 
@@ -84,6 +90,33 @@ def linegraph():
     return render_template("index_linegraph.html")
 
 
+@app.route("/covid_data/", methods=['GET'])
+def covid_data_1():
+    covid_data_path="./data/covid_19_data.csv"
+    covid_df= pd.read_csv(covid_data_path)
+
+    # return covid_df.to_csv()
+
+@app.route("/bubble/", methods=['GET'])
+def bubblegraph():
+    return render_template("index_bubble.html")
+
+
+@app.route("/choro/", methods=['GET'])
+def choro():
+    print()
+    graph = global_choropleth.choro()
+    fig = go.Figure()
+    fig.add_trace(graph)
+    plt_div = plot(fig, output_type='div')
+    # return render(request, "index.html", context={'plot_div': plot_div})
+    # ids = ['graph-{}'.format(i) for i, _ in enumerate(graphs)]
+    # graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
+    return render_template('index_test.html', graphJSON=graphJSON)
+
+
+
+
 # A welcome message to test our server
 @app.route('/')
 def index():
@@ -93,3 +126,4 @@ def index():
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
     app.run(threaded=True, port=5000)
+    app.config['TEMPLATES_AUTO_RELOAD'] = True

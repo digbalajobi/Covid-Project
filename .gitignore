@@ -2,3 +2,5 @@ venv
 venv/*
 
 key.csv
+
+/misc
