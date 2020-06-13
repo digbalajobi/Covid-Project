@@ -38,10 +38,17 @@ overflow-y: scroll !important;
             <h4>Cases By Country</h4>
             <iframe src="/linegraph" height="600px" width="600px"></iframe>
             <p>
-                This is an interactive tool that displays the global impact of the Coronavirus pandemic.
-                You are able to physically see the increase in Coronavirus cases within a span of 5 months
-                (January to May of 2020). The drop down on the top left hand of corner
-                contains a list of countries in Alphabetical order which allows for the graph to change by country.
+                This is an interactive tool that displays the global impact of the Coronavirus pandemic. You are able to
+                physically see the increase in Coronovirus cases within a span of 5 months (January to May of 2020). The
+                drop down on the top left hand of corner contains a list of countries in Alphabetical order which allows
+                for the graph to change by country.</p>
+            <p>
+                As you can see all the graphs show a positive linear graph representing the increase in Covid over the 5
+                month period. In order to be able to display this line graph we set the variable country to the first
+                index of the data which represented the all the countries in the dataset. We then used a for loop to
+                grab and iterate through the dates and a corresponding coronavirus value. A d3 select button was added
+                in order to create the drop down that listed all the countriesand a .on(change) function so that the
+                line graphs can change as the different countries are select.
             </p>
         </div>
 
@@ -59,6 +66,20 @@ overflow-y: scroll !important;
                 and select which date you would like to see displayed.
                 This map will zoom in on any location.
             </p>
+            <p>
+                a. The first spike in cases in the US can be seen around 3/18/20 in the vicinity of NYC
+            </p>
+            <p>
+                b. Spreading of cases is more concentrated at the coasts and occurs much earlier than in the midwest.
+            </p>
+            <p>
+                c. Forunately, the ratio of deaths/cases is relatively low
+            </p>
+            <p>
+                d. Globally, cases spiked first in China. The next three spikes occured in Japan, Iran and Italy. From
+                there it quickly moved across eastern europe until early April, where it had touched nearly every
+                continent. Cases spiked most recently in Africa and Australia.
+            </p>
         </div>
 
 
@@ -73,10 +94,26 @@ overflow-y: scroll !important;
             </h4>
             <iframe src="/bubble" height="600px" width="600px"></iframe>
             <p>
-                Bubble Chart showing countries with over 100,000 cases as of 06/02/20.
+                Bubble Chart showing countries with over 50,000 cases as of 06/02/20.
                 The size of the bubbles represents the amount of confirmed cases.
                 As can be seen in the chart, United States has far surpassed any other country
                 when it comes to Covid-19 cases. The US has more than 1.8 million confirmed cases.
+            </p>
+            US
+            <p>
+                1,800,000 / 308,000,000 = <strong>.5 %</strong>
+            </p>
+            UK
+            <p>
+                    276,000 / 66,000,000 = <strong>.4 %</strong>
+            </p>
+            Peru
+            <p>
+                164,000 / 32,000,000 = <strong>.5 %</strong>
+            </p>
+            China
+            <p>
+                84,000 / 1,427,000,000 = <strong>.00007 %</strong>
             </p>
 
 
@@ -93,12 +130,17 @@ overflow-y: scroll !important;
             <h4>
                 State Progression
             </h4>
-            <iframe src="/choro" height="600px" width="600px"></iframe>
+            <iframe src="/choro" height="700px" width="600px"></iframe>
             <p>
-               
+                This is a choropleth progression of cases in each American Provice (State).
+                The scale changes drastically as the pandemic exponentially inclines.
+                This was built with a Plotly package called <a href="https://plotly.com/dash/">
+                    <strong>Dash</strong></a>,
+                which is an entire self-contained web framework with its own syntax
+                for building data analysis web applications entirely in Python.
             </p>
 
-            
+
         </div>
 
 
